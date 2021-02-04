@@ -8,8 +8,12 @@
 2.还可以隐藏头部和下方的介绍与评论之类，便于查看图片<br>
 ![image](https://github.com/brokes6/Photolist/blob/master/FU%202021-01-31%2019-46-43-709.gif)<br>
 <br>
-## 后续计划
-  1.将添加图片加载时的进度显示（也就是监听图片加载）
+3.《更新》加载图片时会显示加载进度，方便用户查看<br>
+![image](https://github.com/brokes6/Photolist/blob/master/FU%202021-02-04%2014-51-38-296.gif)<br>
 <br>
+4.《更新》用户也可以长按对图片进行操作<br>
+![image](https://github.com/brokes6/Photolist/blob/master/open.gif)<br>
+<br>
+
 <br>
 当然这只是个简单的Dome，后续将继续完善~~~
