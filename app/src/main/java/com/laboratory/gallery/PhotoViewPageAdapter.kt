@@ -43,8 +43,9 @@ class PhotoViewPageAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: PhotoViewPagerHolder, position: Int) {
         holder.itemView.mainProgressBar.visibility = View.VISIBLE
+        ChangeImage(holder)
         Glide.with(holder.itemView).load(getItem(position).masterMap)
-            .listener(object : RequestListener<Drawable>{
+            .listener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(
                     e: GlideException?,
                     model: Any?,
@@ -74,32 +75,28 @@ class PhotoViewPageAdapter(private val context: Context) :
         this.linener = linener
     }
 
-//    fun ChangeImage(holder: PhotoViewPagerHolder) {
-//        ProgressManager.getInstance().addResponseListener(
-//            getItem(holder.adapterPosition).masterMap,
-//            object : ProgressListener {
-//                override fun onProgress(progressInfo: ProgressInfo?) {
-//                    progressInfo?.let {
-//                        holder.itemView.circularProgressBar.progress = it.percent.toFloat()
-//                        Log.e("TAG", "onProgress: 当前进度为${it.percent}")
-//                        if (it.isFinish) {
-//                            holder.itemView.circularProgressBar.visibility = View.GONE
-//                        }
-//                    }
-//                }
-//
-//                override fun onError(id: Long, e: Exception?) {
-//                    holder.itemView.circularProgressBar.visibility = View.GONE
-//                    Toast.makeText(context, "下载错误", Toast.LENGTH_SHORT).show()
-//                }
-//            })
-//        holder.itemView.lookMasterMap.visibility = View.GONE
-//        holder.itemView.circularProgressBar.visibility = View.VISIBLE
-//        Glide.with(context).clear(holder.itemView.imageView)
-//        Glide.with(context).load(getItem(holder.adapterPosition).masterMap)
-//            .placeholder(R.drawable.back_radius_background)
-//            .into(holder.itemView.imageView)
-//    }
+    fun ChangeImage(holder: PhotoViewPagerHolder) {
+        ProgressManager.getInstance().addResponseListener(
+            getItem(holder.adapterPosition).masterMap,
+            object : ProgressListener {
+                override fun onProgress(progressInfo: ProgressInfo?) {
+                    progressInfo?.let {
+                        holder.itemView.mainProgressBar.setAnimProgress(it.percent)
+//                        holder.itemView.mainProgressBar.setmText("${it.percent}%")
+                        Log.e("TAG", "onProgress: 当前进度为${it.percent}")
+                        if (it.isFinish) {
+                            holder.itemView.mainProgressBar.visibility = View.GONE
+                        }
+                    }
+                }
+
+                override fun onError(id: Long, e: Exception?) {
+                    holder.itemView.mainProgressBar.visibility = View.GONE
+                    Toast.makeText(context, "下载错误", Toast.LENGTH_SHORT).show()
+                }
+            })
+        holder.itemView.mainProgressBar.visibility = View.VISIBLE
+    }
 
 
     object diff : DiffUtil.ItemCallback<PhotoDetails>() {
